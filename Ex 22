@@ -1,0 +1,45 @@
+import numpy as np
+from scipy import stats
+
+# Blood pressure reduction data
+drug = np.array([
+    10, 12, 8, 11, 9, 13, 10, 12, 11, 9
+])
+
+placebo = np.array([
+    5, 6, 4, 7, 5, 6, 4, 5, 7, 6
+])
+
+confidence_level = 0.95
+
+# Confidence interval for drug
+drug_mean = np.mean(drug)
+drug_sem = stats.sem(drug)
+
+drug_ci = stats.t.interval(
+    confidence_level,
+    len(drug) - 1,
+    loc=drug_mean,
+    scale=drug_sem
+)
+
+# Confidence interval for placebo
+placebo_mean = np.mean(placebo)
+placebo_sem = stats.sem(placebo)
+
+placebo_ci = stats.t.interval(
+    confidence_level,
+    len(placebo) - 1,
+    loc=placebo_mean,
+    scale=placebo_sem
+)
+
+print("Drug Group")
+print("Mean reduction:", round(drug_mean, 2))
+print("95% Confidence Interval:",
+      tuple(round(x, 2) for x in drug_ci))
+
+print("\nPlacebo Group")
+print("Mean reduction:", round(placebo_mean, 2))
+print("95% Confidence Interval:",
+      tuple(round(x, 2) for x in placebo_ci))
