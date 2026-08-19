@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+
+# Load customer reviews
+data = pd.read_csv("customer_reviews.csv")
+
+ratings = data["rating"]
+
+# Calculate mean
+mean_rating = ratings.mean()
+
+# Standard error
+sem = stats.sem(ratings)
+
+# 95% confidence interval
+confidence_interval = stats.t.interval(
+    0.95,
+    len(ratings) - 1,
+    loc=mean_rating,
+    scale=sem
+)
+
+print("Mean Rating:",
+      round(mean_rating, 2))
+
+print("95% Confidence Interval:",
+      tuple(round(x, 2)
+            for x in confidence_interval))
