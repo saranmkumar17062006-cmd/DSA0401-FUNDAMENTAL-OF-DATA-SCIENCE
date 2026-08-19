@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+
+# Read CSV file
+data = pd.read_csv("rare_elements.csv")
+
+values = data["concentration"].dropna().values
+
+# User inputs
+n = int(input("Enter sample size: "))
+confidence = float(input("Enter confidence level (%): "))
+precision = float(input("Enter desired precision: "))
+
+# Select sample
+sample = values[:n]
+
+# Point estimate
+mean = np.mean(sample)
+
+# Standard deviation
+std = np.std(sample, ddof=1)
+
+# Confidence level
+alpha = 1 - confidence / 100
+
+# Critical t value
+t_value = stats.t.ppf(
+    1 - alpha / 2,
+    df=n - 1
+)
+
+# Margin of error
+margin_error = t_value * std / np.sqrt(n)
+
+# Confidence interval
+lower = mean - margin_error
+upper = mean + margin_error
+
+print("\nPoint Estimate:", round(mean, 4))
+
+print("Confidence Interval:",
+      round(lower, 4),
+      "to",
+      round(upper, 4))
+
+print("Margin of Error:",
+      round(margin_error, 4))
+
+print("Desired Precision:",
+      precision)
