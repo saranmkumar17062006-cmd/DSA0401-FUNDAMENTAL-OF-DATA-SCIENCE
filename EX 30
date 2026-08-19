@@ -1,0 +1,57 @@
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+
+# Sample patient dataset
+# Features: Temperature, Heart Rate
+X = np.array([
+    [36.5, 70],
+    [36.7, 72],
+    [37.0, 75],
+    [37.5, 85],
+    [38.0, 90],
+    [38.5, 95],
+    [36.6, 68],
+    [37.8, 88],
+    [38.2, 92],
+    [36.8, 73]
+])
+
+# Labels
+# 0 = No condition
+# 1 = Condition
+y = np.array([
+    0, 0, 0, 1, 1,
+    1, 0, 1, 1, 0
+])
+
+# Get k from user
+k = int(input("Enter value of k: "))
+
+# Create KNN classifier
+model = KNeighborsClassifier(
+    n_neighbors=k
+)
+
+# Train
+model.fit(X, y)
+
+# User input
+temperature = float(
+    input("Enter patient temperature: ")
+)
+
+heart_rate = float(
+    input("Enter heart rate: ")
+)
+
+# Prediction
+patient = [[temperature, heart_rate]]
+
+prediction = model.predict(patient)
+
+print("\nPrediction:")
+
+if prediction[0] == 1:
+    print("Patient has the medical condition.")
+else:
+    print("Patient does not have the medical condition.")
