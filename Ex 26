@@ -1,0 +1,56 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import ttest_ind
+
+# Control group
+control = np.array([
+    70, 72, 68, 71, 69,
+    73, 70, 72, 69, 71
+])
+
+# Treatment group
+treatment = np.array([
+    80, 82, 78, 85, 81,
+    83, 79, 84, 82, 80
+])
+
+# Perform independent t-test
+t_stat, p_value = ttest_ind(
+    control,
+    treatment
+)
+
+print("Control Mean:",
+      round(np.mean(control), 2))
+
+print("Treatment Mean:",
+      round(np.mean(treatment), 2))
+
+print("\nt-statistic:",
+      round(t_stat, 4))
+
+print("p-value:",
+      round(p_value, 6))
+
+alpha = 0.05
+
+if p_value < alpha:
+    print("\nReject H0.")
+    print("Treatment has a statistically significant effect.")
+else:
+    print("\nFail to reject H0.")
+    print("Treatment does not have a statistically significant effect.")
+
+# Visualization
+groups = ["Control", "Treatment"]
+means = [
+    np.mean(control),
+    np.mean(treatment)
+]
+
+plt.bar(groups, means)
+
+plt.title("Treatment Effectiveness")
+plt.ylabel("Mean Outcome")
+
+plt.show()
