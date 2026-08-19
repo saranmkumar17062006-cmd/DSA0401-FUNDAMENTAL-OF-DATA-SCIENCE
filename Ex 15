@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+
+# Temperature data
+data = pd.DataFrame({
+    "Chennai": [30, 31, 32, 33, 34, 35],
+    "Bangalore": [22, 23, 24, 23, 22, 24],
+    "Delhi": [15, 20, 25, 30, 35, 40]
+})
+
+print("Temperature Data:")
+print(data)
+
+# Mean
+mean_temperature = data.mean()
+
+# Standard deviation
+std_temperature = data.std()
+
+# Temperature range
+temperature_range = data.max() - data.min()
+
+print("\nMean temperature:")
+print(mean_temperature)
+
+print("\nStandard deviation:")
+print(std_temperature)
+
+print("\nTemperature range:")
+print(temperature_range)
+
+# Highest range
+highest_range_city = temperature_range.idxmax()
+
+# Lowest standard deviation
+consistent_city = std_temperature.idxmin()
+
+print("\nCity with highest temperature range:",
+      highest_range_city)
+
+print("City with most consistent temperature:",
+      consistent_city)
