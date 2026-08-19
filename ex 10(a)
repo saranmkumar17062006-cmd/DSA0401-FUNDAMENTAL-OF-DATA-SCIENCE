@@ -1,0 +1,24 @@
+import matplotlib.pyplot as plt
+
+months = [
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "Jun", "Jul", "Aug"
+]
+
+sales = [
+    20000, 25000, 22000, 30000,
+    35000, 32000, 40000, 45000
+]
+
+plt.plot(
+    months,
+    sales,
+    marker="o"
+)
+
+plt.title("Monthly Sales")
+plt.xlabel("Month")
+plt.ylabel("Sales")
+plt.grid(True)
+
+plt.show()
