@@ -1,0 +1,57 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+# Sample data for 18 adults
+data = pd.DataFrame({
+    "Age": [23, 25, 28, 30, 32, 35, 38, 40, 42,
+            45, 47, 50, 52, 55, 57, 60, 62, 65],
+
+    "Fat": [12, 15, 18, 20, 22, 24, 25, 27, 28,
+            30, 31, 33, 35, 36, 38, 40, 42, 44]
+})
+
+# Mean
+print("Mean:")
+print(data.mean())
+
+# Median
+print("\nMedian:")
+print(data.median())
+
+# Standard deviation
+print("\nStandard Deviation:")
+print(data.std())
+
+# Boxplot for Age
+plt.boxplot(data["Age"])
+plt.title("Boxplot of Age")
+plt.ylabel("Age")
+plt.show()
+
+# Boxplot for Body Fat
+plt.boxplot(data["Fat"])
+plt.title("Boxplot of Body Fat")
+plt.ylabel("Body Fat (%)")
+plt.show()
+
+# Scatter plot
+plt.scatter(data["Age"], data["Fat"])
+
+plt.title("Age vs Body Fat")
+plt.xlabel("Age")
+plt.ylabel("Body Fat (%)")
+plt.grid(True)
+plt.show()
+
+# Q-Q plot for Age
+stats.probplot(data["Age"], dist="norm", plot=plt)
+
+plt.title("Q-Q Plot of Age")
+plt.show()
+
+# Q-Q plot for Body Fat
+stats.probplot(data["Fat"], dist="norm", plot=plt)
+
+plt.title("Q-Q Plot of Body Fat")
+plt.show()
