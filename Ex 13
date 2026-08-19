@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read CSV file
+data = pd.read_csv("stock_data.csv")
+
+# Calculate statistics
+mean_price = data["Close"].mean()
+std_price = data["Close"].std()
+minimum = data["Close"].min()
+maximum = data["Close"].max()
+
+price_range = maximum - minimum
+
+print("Stock Price Analysis")
+print("--------------------")
+
+print("Mean closing price:", round(mean_price, 2))
+print("Standard deviation:", round(std_price, 2))
+print("Minimum price:", minimum)
+print("Maximum price:", maximum)
+print("Price range:", price_range)
+
+# Plot stock prices
+plt.plot(data["Date"], data["Close"], marker="o")
+
+plt.title("Stock Price Movement")
+plt.xlabel("Date")
+plt.ylabel("Closing Price")
+
+plt.xticks(rotation=45)
+plt.grid(True)
+
+plt.show()
